@@ -1,0 +1,104 @@
+function zasoby(z) --sprawdzanie zasobow
+	if (turtle.getItemCount(z)==0)
+	then
+		if (z==1) then textutils.slowPrint("drewna1")
+		
+		i = read()
+		return zasoby(z)
+		end
+		if (z==2) then textutils.slowPrint("welny 2") 
+		
+		i = read()
+		return zasoby(z)
+		end
+		if (z==3) then textutils.slowPrint("pochodni 3") 
+		
+		i = read()
+		return zasoby(z)
+		end
+	
+ 	end
+return z
+end
+
+function lampa()
+ 	turtle.select(zasoby(1)) 
+ 	turtle.place() 
+turtle.up() 
+	turtle.select(zasoby(1)) 
+ 	turtle.place() 
+turtle.up() 
+	turtle.select(zasoby(1)) 
+ 	turtle.place() 
+turtle.up()
+	turtle.select(zasoby(2)) 
+ 	turtle.place() 
+turtle.up()
+turtle.back() 
+turtle.down() 
+turtle.select(zasoby(3)) 
+ 	turtle.place()
+a=3
+while(a>0)
+do
+turtle.turnRight() 
+turtle.forward() 
+turtle.forward() 
+  	turtle.turnLeft() 
+turtle.forward() 
+turtle.forward() 
+turtle.turnLeft() 
+turtle.select(zasoby(3)) 
+ 	turtle.place()
+a=a-1
+end
+turtle.turnLeft() 
+turtle.forward() 
+turtle.forward() 
+turtle.turnRight() 
+turtle.forward()
+turtle.forward() 
+turtle.turnLeft() 
+
+end
+
+
+
+function np(droga)
+while (droga>0)
+do
+while (turtle.down()==true)
+do
+end
+
+while (turtle.forward()==false)
+do
+if (turtle.getFuelLevel()==0)
+then
+refuel()
+
+else
+turtle.up() 
+end
+end
+droga=droga-1
+end
+end
+function refuel()
+turtle.select(16)
+while(turtle.refuel()==false)
+do
+textutils.slowPrint("potrzeba wegla")
+nic = read()
+end
+end
+textutils.slowPrint("podaj lampy stawiane co 10")
+ 
+xx =read()
+x=tonumber(xx)
+x=x/10
+while (x>0) do
+np(7)
+lampa()
+x=x-1
+end
