@@ -1,0 +1,28 @@
+ textutils.slowPrint("program rc dla turtla smigamy strzalkami (a) - aby leciec w gore (z)- w dol (b) -konczymy")
+while true do
+        local sEvent, param = os.pullEvent("key")
+        if sEvent == "key" then
+            if param == 200 then
+                turtle.forward()
+               
+            end
+  if param == 203 then
+                turtle.turnLeft()        
+            end
+  if param == 205 then
+              turtle.turnRight()      
+            end
+  if param == 208 then
+             turtle.back()    
+            end
+if param == 30 then
+            turtle.up()  
+            end
+if param == 44 then
+           turtle.down()  
+            end
+if param == 48 then
+           break
+            end
+        end
+end
