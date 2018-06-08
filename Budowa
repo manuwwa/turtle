@@ -1,0 +1,577 @@
+function piramida()
+textutils.slowPrint("rozmieszczenie itemow w tym budynku zostalo zmienione na 1-paliwo 2-paliwo reszta kamien putynny podaj szerokosc piramidy:")
+xd = read()
+x=tonumber(xd)
+local function postawpi(x) --funkcja do stawiania pod robotem
+                    if (x<17)
+                    then               
+                    turtle.select(x)
+                    turtle.digDown()
+                    turtle.placeDown()
+                    end
+                end
+local function scieszka(a,z) --ruch po prostej i stawianie ponizej
+while(a>0)
+                do
+                        if(z<17)
+                        then
+                                       
+                        while ((turtle.getItemCount(z))==0)
+                                        do
+                                        z=z+1
+if ((turtle.getItemCount(16))==0)
+then
+textutils.slowPrint("brak piasku")
+cze = read()
+end
+                                        end
+ 
+                        postawpi(z)
+                        end
+                np()
+                a=a-1
+                end
+end
+ 
+ 
+local function kwadrat(x)
+z=4
+a=3
+while(z>0)
+do
+ 
+scieszka(x,a)
+turtle.turnRight()
+z=z-1
+end
+end
+ 
+ 
+up()
+kwadrat(x)
+up()
+while (x>1)
+do
+kwadrat(x)
+x=x-2
+np()
+turtle.turnRight()
+np()
+turtle.turnLeft()
+up()
+end
+end -- koniec podprogramu piramida
+ 
+function dachskosny(a,b)
+local function wdol(xzx)
+while (xzx>0)
+do
+down()
+xzx=xzx-1
+end
+end
+ 
+local function prostadach(v)
+x=9
+while (v>0)
+do
+ 
+prawo()
+postawprzed(x)
+lewo()
+np()
+v=v-1
+end
+end
+ 
+local function polowa(x,y)
+while(y>0)
+do
+prostadach(x)
+up()
+lewo()
+lewo()
+scieszka(x,17)
+prawo()
+np()
+prawo()
+y=y-1
+end
+end
+local function polaczenie(a,b)
+if (math.fmod(b,2)==0)
+then
+b=b/2
+polowa(a,b)
+wdol(b)
+lewo()
+tyl()
+tyl()
+scieszka(b,17)
+tyl()
+prawo()
+scieszka(a,17)
+prawo()
+prawo()
+np()
+b=b-1
+polowa(a,b)
+end
+end
+ 
+    polaczenie (6,4)
+ 
+end --koniec funkcji dachskosny
+ 
+function kwadrato1(a,b,c) --obwodka kwadratu w lewo
+scieszka(b,c)
+tyl()
+lewo()
+scieszka(a,c)
+tyl()
+lewo()
+scieszka(b,c)
+tyl()
+lewo()
+scieszka(a,c)
+tyl()
+lewo()
+end
+ 
+ 
+ 
+function zasoby(z) --sprawdzanie zasobow
+if (turtle.getItemCount(z)==0)
+then
+if (z==1) then return zasoby(2) end
+if (z==2) then textutils.slowPrint("Potrzeba wiecej wegla slot 1,2")
+i = read()
+return zasoby(z)
+ end
+if (z==3) then return zasoby(4) end
+if (z==4) then textutils.slowPrint("Potrzeba wiecej desek slot 3,4")
+i = read()
+return zasoby(z)
+ end
+if (z==5) then textutils.slowPrint("Potrzeba wiecej szyb slot 5")
+i = read()
+return zasoby(z)
+ end
+if (z==6) then return zasoby(7) end
+if (z==7) then textutils.slowPrint("Potrzeba wiecej kamienia slot 6,7")
+i = read()
+return zasoby(z)
+ end
+if (z==8) then textutils.slowPrint("Potrzeba wiecej drewna slot 8")
+i = read()
+return zasoby(z)
+ end
+if (z==9) then textutils.slowPrint("Potrzeba wiecej schodow slot 9")
+i = read()
+return zasoby(z)
+end
+else
+return z
+end
+end
+ 
+ 
+--stale funkcje
+function postawprzed(x)
+turtle.select(zasoby(x))
+turtle.place()
+end
+ 
+function refuel()
+if (turtle.getFuelLevel()==0)
+then
+turtle.select(zasoby(1))
+turtle.refuel()
+end
+end
+function down()
+refuel()
+while (turtle.down()==false)
+do
+turtle.digDown()
+end
+end
+function up()
+refuel()
+while (turtle.up()==false)
+do
+turtle.digUp()
+end
+end
+function lewo()
+refuel()
+turtle.turnLeft()
+end
+function prawo(a)
+refuel()
+turtle.turnRight()
+end
+ 
+function np()
+refuel()
+ 
+while(turtle.forward()==false) --funkcja na przud z sprawdzaniem mozliwosci przejscia
+        do
+        turtle.dig()
+        end
+ 
+                end
+ 
+function tyl()
+refuel()
+while(turtle.back()==false) --funkcja na przud z sprawdzaniem mozliwosci przejscia
+        do
+lewo()
+lewo()
+        turtle.dig()
+lewo()
+lewo()
+        end
+ 
+                end
+ 
+function scieszka(a,z) --ruch po prostej i stawianie ponizej
+while(a>0)
+                do
+                    if (z<17)
+                    then
+                        postaw(z)
+                    end                
+                np()
+                a=a-1
+                end
+end
+ 
+        function postaw(x) --funkcja do stawiania pod robotem
+                    if (x<17)
+                    then               
+                    turtle.select(zasoby(x))
+                    turtle.digDown()
+                    turtle.placeDown()
+                    end
+                end
+               
+ 
+ 
+ 
+ 
+function fundament(a,b) --a dlugosc b szerokosc  
+while (b>0)
+do
+scieszka(a,6)
+lewo()
+lewo()
+scieszka(a,17)
+prawo()
+np()
+prawo()
+b=b-1
+end
+ 
+ 
+ 
+end
+function kwadrato(a,b) --obwodka kwadratu w lewo
+scieszka(b,8)
+tyl()
+lewo()
+scieszka(a,8)
+tyl()
+lewo()
+scieszka(b,8)
+tyl()
+lewo()
+scieszka(a,8)
+tyl()
+lewo()
+end
+ 
+function sciana4(a) --sciany do domku 4x4
+postaw(8)
+np()
+postaw(3)
+np()
+postaw(a)
+np()
+postaw(3)
+np()
+lewo()
+end
+ 
+function sciana41(a) --sciany do domku 4x4
+postaw(8)
+np()
+postaw(a)
+np()
+postaw(3)
+np()
+lewo()
+end
+ 
+function dach5x4()
+np()
+scieszka(2,8)
+lewo()
+lewo()
+scieszka(2,17)
+np()
+prawo()
+np()
+prawo()
+ap=3
+    while (ap>0)
+    do
+    ap=ap-1
+    scieszka(4,8)
+    lewo()
+    lewo()
+    scieszka(4,17)
+    prawo()
+    np()
+    prawo()
+    end
+np()
+scieszka(2,8)
+lewo()
+lewo()
+scieszka(2,17)
+np()
+prawo()
+np()
+prawo()
+end
+ 
+function dachplaski(a,b) --a dlugosc b szerokosc  
+kwadrato(a,b)
+ 
+ 
+np()
+lewo()
+np()
+b=b-1
+a=a-1
+while (b>0)
+do
+scieszka(a,3)
+lewo()
+lewo()
+scieszka(a,17)
+lewo()
+np()
+lewo()
+b=b-1
+end
+end
+function domxnax(a,b,c)
+ fundament(a,b)
+    up()
+    prawo()
+    np()
+while(c>0)
+do
+sciana(a,b)
+        up()
+        c=c-1
+        end
+dachplaski(a,b)
+    end
+ 
+function sciana(a,b)
+cze=2
+while(cze>0)
+do
+postaw(6)
+np()
+scieszka(b-2,3)
+lewo()
+postaw(6)
+np()
+scieszka(a-2,3)
+lewo()
+cze=cze-1
+end
+end
+    function maly5x5() -- budowa domku 5x5
+    fundament(5,5)
+    up()
+    prawo()
+    np()
+    pr=3
+    pra=17
+    druk=1
+            while (druk<4) --budowa scian
+            do
+               if (druk==2) then
+               pr=5
+ 
+               end
+                if (druk==3) then
+                pr=3
+                pra=3
+                end
+            sciana4(pra)
+            sciana4(pr)
+           sciana4(pr)
+        sciana4(pr)
+        up()
+        druk=druk+1
+        end
+dachplaski(5,5)
+    end
+ 
+function maly5x4()
+fundament(5,4)
+prawo()
+np()
+  pr=3
+    pra=17
+ druk=1
+up()
+            while (druk<4) --budowa scian
+            do
+               if (druk==2) then
+               pr=5
+ 
+               end
+                if (druk==3) then
+                pr=3
+                pra=3
+                end
+            sciana41(pra)
+            sciana4(pr)
+           sciana41(3)
+        sciana4(pr)
+        up()
+        druk=druk+1
+        end
+dach5x4()
+end
+function quary(a,b) --budowa pod quary
+scieszka(b,31)
+tyl()
+lewo()
+scieszka(a,31)
+tyl()
+lewo()
+scieszka(b,31)
+tyl()
+lewo()
+scieszka(a,31)
+tyl()
+lewo()
+end
+       
+ -- program glowny
+textutils.slowPrint("rozmieszczenie itemow sloty 1-paliwo(wegiel) 2-paliwo(wegiel) 3-deski 4-deski 5-plytki szklane 6-coblestone 7-coblestone 8-drewno 9-schody")
+i = read()
+textutils.slowPrint("jaki dom chcesz postawic? 1- 5x5maly plaski dach  2-maly 5x4 3-piramida 4-dom z twoimi parametrami 5- miejsce na pole 6- szklarnia 8- budowa pod quary lub 0-kopanie")
+dom =read()
+if (dom=="0") then
+textutils.slowPrint("jaka wielkosc ,szerokosc i glebokosc")
+xx =read()
+yy =read()
+zz =read()
+x=tonumber(xx)
+y=tonumber(yy)
+z=tonumber(zz)
+scieszka(x,30)  end
+if (dom=="1") then maly5x5() end
+if (dom=="2") then maly5x4() end
+if (dom=="3") then piramida() end
+if (dom=="4") then
+ textutils.slowPrint("ten dom jest tworzony dynamicznie podaj jego paremetry")
+textutils.slowPrint("dzlugosc")
+xxx=read()
+textutils.slowPrint("szerokosc")
+yyy=read()
+textutils.slowPrint("wysokosc")
+zzz=read()
+textutils.slowPrint("rozpoczynam budowe")
+xx=tonumber(xxx)
+yy=tonumber(yyy)
+zz=tonumber(zzz)
+ domxnax(xx,yy,zz)
+end
+if (dom=="5") then
+ textutils.slowPrint("ten budynek potrzebuje ziemi w slotach 3,4")
+textutils.slowPrint("dzlugosc")
+xxx=read()
+textutils.slowPrint("szerokosc")
+yyy=read()
+xx=tonumber(xxx)
+yy=tonumber(yyy)
+dachplaski(xx,yy)
+end
+if (dom=="6") then
+textutils.slowPrint("ten budynek potrzebuje ziemi w slotach 3,4")
+textutils.slowPrint("dzlugosc")
+xxx=read()
+textutils.slowPrint("szerokosc")
+yyy=read()
+textutils.slowPrint("budowac razem z miejscem na pole ")
+flaga=read()
+xx=tonumber(xxx)
+yy=tonumber(yyy)
+if (flaga=="tak") then
+dachplaski(xx,yy)
+end
+lewo()
+np()
+lewo()
+np()
+lewo()
+lewo()
+zzz=4
+up()
+while (zzz>0)
+do
+kwadrato1(yy,xx,6)
+zzz=zzz-1
+up()
+end
+fundament(xx,yy)
+xzxz=5
+while (xzxz>0)
+do
+down()
+xzxz=xzxz-1
+end
+end
+if (dom=="7") then
+textutils.slowPrint("szerokosc")
+yyyx=read()
+textutils.slowPrint("wysokosc")
+yyy=read()
+a=tonumber(yyy)
+b=tonumber(yyyx)
+while (a>0)
+do
+scieszka(b,6)
+lewo()
+lewo()
+scieszka (b,17)
+lewo()
+lewo()
+up()
+a=a-1
+end
+down()
+down()
+end
+if (dom=="8") then
+textutils.slowPrint("jaka wielkosc ,szerokosc")
+xx =read()
+yy =read()
+ 
+x=tonumber(xx)
+y=tonumber(yy)
+ 
+quary(x,y)
+down()
+quary(x,y)
+ end
