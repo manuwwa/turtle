@@ -9,4 +9,5 @@ Instalacja
 ======
 W minecraftturtle wpisać a następnie uruchomić
 >pastebin get 5K824XXE up 
+
 Dzieki temu pobrana zostanie pełna biblioteka ze wszystkimi dostępnymi programami
